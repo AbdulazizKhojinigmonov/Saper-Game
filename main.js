@@ -257,12 +257,12 @@ async function auth() {
   const login = document.getElementById("login").value;
   let response = await sendRequest("user", "GET", { username: login });
   if (response.error) {
-    alert("Вы не зарегистрированы");
+    alert("you didn`t logit yet");
     let registration = await sendRequest("user", "POST", {
       username: login,
     });
     if (registration.error) {
-      alert("Успешная регистрация");
+      alert("you have logined");
       loginWrapper.style.display = "none";
       USERNAME = response.username;
       updateUserBalance();
@@ -296,18 +296,18 @@ async function updateUserBalance() {
     alert(response.message);
   } else {
     const user = document.querySelector("header span");
-    user.innerHTML = `Пользователь ${response.username} с балансом ${response.balance}`;
+    user.innerHTML = `User ${response.username} with balance ${response.balance}`;
   }
 }
 
 // Функция для кнопки начало игры
 function startOrStopGame() {
-  if (gameBtn.innerHTML === "ИГРАТЬ") {
-    gameBtn.innerHTML = "ЗАВЕРШИТЬ ИГРУ";
+  if (gameBtn.innerHTML === "Game") {
+    gameBtn.innerHTML = " Game Over";
     gameBtn.style.backgroundColor = "red";
     startGame();
   } else {
-    gameBtn.innerHTML = "ИГРАТЬ";
+    gameBtn.innerHTML = "Game";
     gameBtn.style.backgroundColor = "#66a663";
     stopGame();
   }
@@ -321,7 +321,7 @@ async function startGame() {
   };
   let response = await sendRequest("new_game", "POST", payload);
   if (response.error) {
-    gameBtn.innerHTML = "ИГРАТЬ";
+    gameBtn.innerHTML = "Game";
     gameBtn.style.backgroundColor = "#66a663";
   } else {
     updateUserBalance();
@@ -374,17 +374,17 @@ async function makeStep(event) {
     } else {
       if (response.status === "Ok") {
       } else if (response.status === "Failed") {
-        alert("Вы проиграли");
+        alert("you failed");
         updateUserBalance();
-        gameBtn.innerHTML = "ИГРАТЬ";
+        gameBtn.innerHTML = "Game";
         gameBtn.style.backgroundColor = "#66a663";
         setTimeout(() => {
           resetField();
         }, 2000);
       } else if (response.status === "Won") {
-        alert("Вы победили");
+        alert("you won");
         updateUserBalance();
-        gameBtn.innerHTML = "ИГРАТЬ";
+        gameBtn.innerHTML = "Game";
         gameBtn.style.backgroundColor = "#66a663";
         setTimeout(() => {
           resetField();
