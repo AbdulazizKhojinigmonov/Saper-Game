@@ -153,5 +153,10 @@ h1{
     cursor: pointer;
     font-size: 24px;
 }
-
+.field.bomb{
+    background-image: url(./img/bomb.png);
+    background-color: #66a663;
+    background-position: center;
+    background-size : 30px;
+}
 
